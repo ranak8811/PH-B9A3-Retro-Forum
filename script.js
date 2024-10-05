@@ -16,6 +16,7 @@ const loadAllPosts = async (category) => {
   );
   const data = await response.json();
   // console.log(data);
+
   displayAllPosts(data.posts);
 };
 
@@ -137,13 +138,24 @@ const loadLatestPosts = async () => {
   );
   const data = await res.json();
   // console.log(data);
-  displayLatestPosts(data);
+
+  const latestPostLoader = document.getElementById("latestPostLoader");
+  latestPostLoader.classList.remove("hidden");
+  setTimeout(() => {
+    displayLatestPosts(data);
+    latestPostLoader.classList.add("block");
+  }, 3000);
 };
 
 const displayLatestPosts = (posts) => {
   // console.log(posts);
 
   const latestPostContainer = document.getElementById("latest-post-container");
+  // setTimeout(() => {
+  //   const latestPostLoader = document.getElementById("latestPostLoader");
+  //   latestPostLoader.classList.remove("hidden");
+  //   latestPostContainer.innerHTML = "";
+  // }, 3000);
 
   posts.forEach((post) => {
     // console.log(post);
